@@ -2,6 +2,7 @@ package com.example.newstart
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -16,26 +17,22 @@ class MainActivity : AppCompatActivity() {
             //su dung nhu nay se kiem soat duoc sau khi click
             // vao item guard se dc chuyen man hinh
             if(menuItem.itemId==R.id.nav_guard){
-                inflateFragment()
+                inflateFragment(GuardFragment.newInstance())
             } else if(menuItem.itemId == R.id.nav_home){
-                inflateHomeFragment()
+                inflateFragment(HomeFragment.newInstance())
             }
             true
         }
 
    }
 
-    private fun inflateHomeFragment() {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.container, HomeFragment.newInstance())
-        transaction.commit()
-    }
+
 
     // thay doi man
-    private fun inflateFragment() {
+    private fun inflateFragment(newInstance: Fragment) {
 
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.container, GuardFragment.newInstance())
+        transaction.replace(R.id.container, newInstance)
         transaction.commit()
     }
 }
